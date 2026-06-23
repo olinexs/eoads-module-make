@@ -55,33 +55,35 @@ my-project/
 ```
 Modules/PurchaseOrder/
 ├── app/
-│   ├── Actions/
-│   ├── DTOs/
-│   ├── Enums/
-│   ├── Events/
 │   ├── Http/
 │   │   ├── Controllers/
 │   │   ├── Requests/
 │   │   └── Resources/
-│   ├── Models/
-│   ├── Notifications/
-│   ├── Observers/
-│   ├── Policies/
+│   ├── Actions/
+│   ├── Services/
 │   ├── Repositories/
 │   │   ├── PurchaseOrderRepositoryInterface.php
 │   │   └── EloquentPurchaseOrderRepository.php
-│   ├── Services/
-│   └── Support/
-├── Providers/
-│   └── PurchaseOrderServiceProvider.php
+│   ├── Models/
+│   ├── Enums/
+│   ├── Events/
+│   ├── Observers/
+│   ├── Notifications/
+│   ├── Policies/
+│   └── Providers/
+│       └── PurchaseOrderServiceProvider.php
+├── config/
+├── database/
+│   ├── seeders/
+│   └── factories/
 ├── routes/
 │   ├── api.php
 │   └── web.php
-├── tests/
-│   ├── Feature/
-│   └── Unit/
 └── module.json
 ```
+
+> Migrations are **not** generated inside the module. Per the architecture rule
+> they live in `backend/database/migrations/` only.
 
 ### Frontend — `frontend/resources/js/modules/purchaseOrder/`
 

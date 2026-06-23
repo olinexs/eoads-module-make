@@ -13,7 +13,7 @@ class ModuleMakeCommand extends Command
                             {--ts : Generate TypeScript frontend files}
                             {--force : Overwrite existing module}';
 
-    protected $description = 'Scaffold a new module — backend (Modules/) and frontend (resources/js/modules/)';
+    protected $description = 'Scaffold a new module — backend (Modules/) and frontend (resources/{js,ts}/modules/)';
 
     public function handle(): int
     {
@@ -71,13 +71,17 @@ class ModuleMakeCommand extends Command
             'app/Http/Controllers',
             'app/Http/Requests',
             'app/Http/Resources',
-            'app/Models',
+            'app/Actions',
             'app/Services',
             'app/Repositories',
+            'app/Models',
+            'app/Enums',
+            'app/Events',
+            'app/Observers',
+            'app/Notifications',
             'app/Policies',
             'app/Providers',
             'config',
-            'database/migrations',
             'database/seeders',
             'database/factories',
             'routes',
@@ -98,7 +102,6 @@ class ModuleMakeCommand extends Command
             "app/Repositories/Eloquent{$name}Repository.php"          => $this->stubEloquentRepository($name),
             'routes/api.php'                                           => $this->stubApiRoutes($name),
             'routes/web.php'                                           => $this->stubWebRoutes(),
-            'database/migrations/.gitkeep'                             => '',
             'database/seeders/.gitkeep'                                => '',
             'database/factories/.gitkeep'                              => '',
         ];
@@ -462,7 +465,8 @@ class ModuleMakeCommand extends Command
         return <<<JS
         import { api } from '@/plugins/axios'
 
-        const BASE = '/api/{$kebab}'
+        // axios baseURL is already '/api' — keep paths relative to it.
+        const BASE = '/{$kebab}'
 
         export const {$camel}Service = {
           index: (params = {}) => api.get(BASE, { params }),
@@ -604,7 +608,8 @@ class ModuleMakeCommand extends Command
         import { api } from '@/plugins/axios'
         import type { AxiosResponse } from 'axios'
 
-        const BASE = '/api/{$kebab}'
+        // axios baseURL is already '/api' — keep paths relative to it.
+        const BASE = '/{$kebab}'
 
         export const {$camel}Service = {
           index: (params = {}): Promise<AxiosResponse>  => api.get(BASE, { params }),

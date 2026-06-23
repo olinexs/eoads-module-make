@@ -2,6 +2,21 @@
 
 All notable changes to this package will be documented in this file.
 
+## [1.1.0] - 2026-06-23
+
+### Added
+- Backend scaffold now generates a `config/` directory and
+  `database/{seeders,factories}/` directories.
+
+### Changed
+- Reorganized the backend scaffold: `Providers/` (ServiceProvider) now lives at the
+  module root, and the generated directory set was streamlined to
+  Http (Controllers/Requests/Resources), Actions, Services, Repositories
+  (interface + Eloquent implementation), Models, Enums, Events, Observers,
+  Notifications, and Policies.
+- Clarified that migrations are NOT scaffolded inside the module — per the
+  architecture rule they live in `backend/database/migrations/`.
+
 ## [1.0.0] - 2026-06-23
 
 ### Added
